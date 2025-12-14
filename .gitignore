@@ -1,0 +1,49 @@
+# =============================================
+# Academia Ampere Maxwell - Git Ignore
+# =============================================
+
+# === Archivos de Configuración Sensibles ===
+# Si tienes credenciales reales, descomenta la siguiente línea
+# intranet/config/database.php
+
+# === Carpetas de Subida de Usuarios ===
+uploads/*
+!uploads/.gitkeep
+
+# === Dependencias ===
+node_modules/
+vendor/
+
+# === Archivos del Sistema Operativo ===
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# === IDEs y Editores ===
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+
+# === Logs y Cache ===
+*.log
+*.cache
+cache/
+logs/
+
+# === Archivos Temporales ===
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# === Archivos de Base de Datos Locales ===
+*.sql
+!database/*.sql
+
+# === Variables de Entorno ===
+.env
+.env.local
+.env.*.local

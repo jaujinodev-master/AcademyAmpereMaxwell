@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Academia Ampere Maxwell</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="icon" href="assets/images/AMPEREMAXWELL.jpg" type="image/x-icon" />
+  <!-- ICONOS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- AOS ANIMATIONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+
+  <!-- Lottie -->
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+  <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+  <!-- TIPOGRAFÍA (Google Fonts) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <div id="intro-banner" class="intro-banner">
+    <img src="assets/images/flyer1.jpg" alt="Bienvenido a Ampere Maxwell" />
+    <button id="close-banner" class="close-banner-btn">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container header-container">
+      <a href="#" class="logo-link">
+        <img src="assets/images/AMPEREMAXWELL.jpg" alt="Ampere Maxwell" class="logo" />
+      </a>
+
+      <nav class="navbar">
+        <ul class="nav-links">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#beneficios">Beneficios</a></li>
+          <li><a href="#ciclos">Ciclos</a></li>
+          <li><a href="#testimonios">Testimonios</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+        <div class="nav-buttons">
+          <a href="intranet/login.php" class="btn platform-access-btn">
+            <i class="fas fa-sign-in-alt"></i> Acceder a Plataforma
+          </a>
+          <a href="#contacto" class="btn inscribirse-btn">Inscribirse</a>
+        </div>
+        <div class="hamburger" id="hamburger">
+          <span></span><span></span><span></span>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- SECCIONES -->
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-slider">
+        <div class="slide active" style="background-image: url('assets/images/flyer1.jpg')"></div>
+        <div class="slide" style="background-image: url('assets/images/flyer2.jpg')"></div>
+        <div class="slide" style="background-image: url('assets/images/AMPEREMAXWELL.jpg')"></div>
+      </div>
+
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content container">
+        <h1><span id="typed-text"></span><span class="cursor">|</span></h1>
+        <p>Con clases presenciales o virtuales diseñadas para tu éxito.</p>
+        <div class="hero-buttons">
+          <a href="intranet/login.php" class="btn btn-primary">Acceder a Plataforma</a>
+          <a href="#contacto" class="btn btn-secondary">Quiero inscribirme</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="benefits-section container" id="beneficios">
+      <div class="section-title">
+        <h2>¿Por qué elegirnos?</h2>
+        <p>
+          Conoce los beneficios que hacen de Ampere Maxwell tu mejor elección.
+        </p>
+      </div>
+
+      <div class="benefits-grid">
+        <div class="benefit-card" data-aos="fade-up">
+          <img src="assets/images/technology-9480703_1920.jpg" alt="Docentes" class="benefit-icon" />
+          <h3>Docentes Destacados</h3>
+          <p>
+            Profesionales con experiencia real y metodología clara, moderna y
+            cercana al estudiante.
+          </p>
+        </div>
+
+        <div class="benefit-card" data-aos="fade-up" data-aos-delay="100">
+          <img src="assets/images/man-9481358_1920.jpg" alt="Plataforma" class="benefit-icon" />
+          <h3>Plataforma Virtual Moderna</h3>
+          <p>
+            Accede a tu dashboard personalizado con clases grabadas, materiales,
+            calificaciones y evaluaciones desde cualquier lugar. Sistema completo
+            de gestión académica.
+          </p>
+        </div>
+
+        <div class="benefit-card" data-aos="fade-up" data-aos-delay="200">
+          <img src="assets/images/ai-generated-9649376_1920.png" alt="Asesoría" class="benefit-icon" />
+          <h3>Asesoría Personalizada</h3>
+          <p>
+            Seguimiento constante a cada alumno por parte de nuestros docentes
+            y tutores.
+          </p>
+        </div>
+
+        <div class="benefit-card" data-aos="fade-up" data-aos-delay="300">
+          <img src="assets/images/quiz-7065191_1920.png" alt="Simulacros" class="benefit-icon" />
+          <h3>Simulacros Semanales</h3>
+          <p>
+            Prepara tu mente con pruebas similares a los exámenes reales de
+            admisión.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="ciclos-section container" id="ciclos">
+      <div class="section-title">
+        <h2>Nuestros Ciclos Académicos</h2>
+        <p>
+          Elige el ciclo que se adapta a tus necesidades académicas y metas
+          personales.
+        </p>
+      </div>
+
+      <div class="ciclos-grid">
+        <div class="ciclo-card" data-aos="zoom-in">
+          <h3>Ciclo Verano</h3>
+          <div class="mod">Modalidad: Presencial y Virtual</div>
+          <div class="duracion">Duración: Enero - Marzo</div>
+          <div class="desc">
+            Ideal para estudiantes que quieren comenzar el año con ventaja
+            competitiva.
+          </div>
+          <a href="#" class="btn-ciclo">Más información</a>
+        </div>
+
+        <div class="ciclo-card" data-aos="zoom-in" data-aos-delay="100">
+          <h3>Ciclo Ordinario</h3>
+          <div class="mod">Modalidad: Virtual</div>
+          <div class="duracion">Duración: Abril - Julio</div>
+          <div class="desc">
+            Enfocado en el desarrollo progresivo de habilidades y
+            conocimientos clave.
+          </div>
+          <a href="#" class="btn-ciclo">Más información</a>
+        </div>
+
+        <div class="ciclo-card" data-aos="zoom-in" data-aos-delay="200">
+          <h3>Ciclo Repaso</h3>
+          <div class="mod">Modalidad: Intensivo Presencial</div>
+          <div class="duracion">Duración: Agosto - Octubre</div>
+          <div class="desc">
+            Preparación intensiva para los exámenes de admisión más exigentes.
+          </div>
+          <a href="#" class="btn-ciclo">Más información</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonios-slider" id="testimonios">
+      <div class="container">
+        <div class="section-title">
+          <h2>Lo que dicen nuestros estudiantes</h2>
+          <p>Testimonios de quienes alcanzaron sus metas con nosotros</p>
+        </div>
+
+        <div class="slider-wrapper">
+          <button class="slider-btn prev" aria-label="Anterior">
+            &#10094;
+          </button>
+
+          <div class="slider-track">
+            <!-- Testimonio 1 -->
+            <div class="testimonio-card">
+              <img src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?auto=format&fit=crop&w=80&h=80"
+                alt="Lucía Ramos" />
+              <p>
+                "Gracias a Ampere Maxwell logré ingresar a mi universidad
+                soñada. ¡Altamente recomendado!"
+              </p>
+              <h4>Lucía Ramos</h4>
+              <span>Ingeniería Industrial - UNCP</span>
+            </div>
+
+            <!-- Testimonio 2 -->
+            <div class="testimonio-card">
+              <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=80&h=80"
+                alt="Jorge Medina" />
+              <p>
+                "Una academia que enseña con pasión y tecnología. Todo muy
+                bien organizado."
+              </p>
+              <h4>Jorge Medina</h4>
+              <span>Medicina Humana - UNSAAC</span>
+            </div>
+
+            <!-- Testimonio 3 -->
+            <div class="testimonio-card">
+              <img src="https://images.unsplash.com/photo-1624561172888-ac93c696e10c?auto=format&fit=crop&w=80&h=80"
+                alt="María Flores" />
+              <p>
+                "Me prepararon para rendir al máximo en mi examen. Una gran
+                experiencia educativa."
+              </p>
+              <h4>María Flores</h4>
+              <span>Derecho - UNMSM</span>
+            </div>
+
+            <!-- Testimonio 4 -->
+            <div class="testimonio-card">
+              <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=80&h=80"
+                alt="Carlos Guzmán" />
+              <p>
+                "Profesores de calidad y seguimiento constante. Aprendí más
+                que en otros lugares."
+              </p>
+              <h4>Carlos Guzmán</h4>
+              <span>Arquitectura - UNI</span>
+            </div>
+          </div>
+
+          <button class="slider-btn next" aria-label="Siguiente">
+            &#10095;
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contacto">
+      <div class="section-title">
+        <h2>Contáctanos</h2>
+        <p>Estamos aquí para ayudarte a lograr tus metas académicas</p>
+      </div>
+
+      <div class="contact-container container">
+        <!-- FORMULARIO -->
+        <div class="contact-form">
+          <form>
+            <div class="input-group">
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" placeholder="Tu nombre completo" required />
+            </div>
+
+            <div class="input-group">
+              <label for="email">Correo electrónico</label>
+              <input type="email" id="email" placeholder="tucorreo@ejemplo.com" required />
+            </div>
+
+            <div class="input-group">
+              <label for="mensaje">Mensaje</label>
+              <textarea id="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn-contacto">Enviar mensaje</button>
+          </form>
+        </div>
+
+        <!-- INFO + MAPA -->
+        <div class="contact-details">
+          <div class="contact-info">
+            <h4><i class="fa-solid fa-location-dot"></i> Dirección</h4>
+            <p>Jr. La Mar 237, Jauja, Junín, Perú</p>
+
+            <h4><i class="fa-solid fa-envelope"></i> Correo</h4>
+            <p>contacto@ampere-maxwell.edu.pe</p>
+
+            <h4><i class="fa-brands fa-whatsapp"></i> WhatsApp</h4>
+            <p>+51 987 654 321</p>
+
+            <h4><i class="fa-solid fa-clock"></i> Horario</h4>
+            <p>Lunes a Sábado: 8:00 – 18:00</p>
+          </div>
+
+          <div class="contact-map">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3865.088961010762!2d-75.49817472487635!3d-11.775381988047327!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x910ef4e4ab426aa7%3A0x5b3681d8aeaa2c83!2sJr.%20La%20Mar%20237%2C%20Jauja%201261%2C%20Per%C3%BA!5e0!3m2!1ses-419!2spe!4v1720199185035!5m2!1ses-419!2spe"
+              width="100%" height="250" style="border: 0" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section class="cta-section" id="cta">
+    <div class="cta-background-pattern"></div>
+    <div class="cta-container container">
+      <div class="cta-content">
+        <div class="cta-header">
+          <span class="cta-badge">
+            <i class="fas fa-fire"></i> Oferta Limitada
+          </span>
+          <h2>¡Asegura tu Futuro Académico!</h2>
+          <p>Únete a la próxima generación de estudiantes exitosos. Plazas limitadas disponibles.</p>
+        </div>
+
+        <div class="cta-features">
+          <div class="cta-feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h3>Educación de Calidad</h3>
+            <p>Profesores expertos y metodología comprobada</p>
+          </div>
+
+          <div class="cta-feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-laptop-code"></i>
+            </div>
+            <h3>Plataforma Digital</h3>
+            <p>Acceso 24/7 a materiales y recursos</p>
+          </div>
+
+          <div class="cta-feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-trophy"></i>
+            </div>
+            <h3>Resultados Garantizados</h3>
+            <p>95% de ingresantes a universidades</p>
+          </div>
+        </div>
+
+        <div class="countdown-wrapper">
+          <h3 class="countdown-title">La inscripción cierra en:</h3>
+          <div class="countdown" id="countdown">
+            <div class="countdown-item">
+              <span class="countdown-number" id="days">00</span>
+              <small class="countdown-label">Días</small>
+            </div>
+            <div class="countdown-separator">:</div>
+            <div class="countdown-item">
+              <span class="countdown-number" id="hours">00</span>
+              <small class="countdown-label">Horas</small>
+            </div>
+            <div class="countdown-separator">:</div>
+            <div class="countdown-item">
+              <span class="countdown-number" id="minutes">00</span>
+              <small class="countdown-label">Minutos</small>
+            </div>
+            <div class="countdown-separator">:</div>
+            <div class="countdown-item">
+              <span class="countdown-number" id="seconds">00</span>
+              <small class="countdown-label">Segundos</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-actions">
+          <a href="#contacto" class="cta-button cta-button-primary" id="openModal">
+            <i class="fas fa-rocket"></i>
+            <span>Inscribirme Ahora</span>
+          </a>
+          <a href="intranet/login.php" class="cta-button cta-button-secondary">
+            <i class="fas fa-sign-in-alt"></i>
+            <span>Ya soy estudiante</span>
+          </a>
+        </div>
+
+        <div class="cta-trust-badges">
+          <div class="trust-badge">
+            <i class="fas fa-shield-alt"></i>
+            <span>Pago Seguro</span>
+          </div>
+          <div class="trust-badge">
+            <i class="fas fa-headset"></i>
+            <span>Soporte 24/7</span>
+          </div>
+          <div class="trust-badge">
+            <i class="fas fa-certificate"></i>
+            <span>Certificado</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div id="modal" class="modal-overlay">
+    <div class="modal-content">
+      <span class="close-modal" id="closeModal">&times;</span>
+      <h3>Formulario de inscripción</h3>
+      <form>
+        <input type="text" placeholder="Tu nombre" required />
+        <input type="email" placeholder="Tu correo" required />
+        <textarea placeholder="Tu mensaje o consulta"></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer-section">
+    <div class="container footer-content">
+      <div class="footer-block footer-logo">
+        <img src="assets/images/AMPEREMAXWELL-removebg-preview.png" alt="Logo Academia Ampere Maxwell" />
+        <p>Formando mentes brillantes con ciencia y pasión por el futuro.</p>
+      </div>
+
+      <div class="footer-block footer-links">
+        <h4>Enlaces rápidos</h4>
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#beneficios">Beneficios</a></li>
+          <li><a href="#ciclos">Ciclos</a></li>
+          <li><a href="#testimonios">Testimonios</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+          <li><a href="intranet/login.php">Acceso Plataforma</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Soporte Técnico</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-block footer-info">
+        <h4>Ubicación</h4>
+        <p>
+          <i class="fa-solid fa-location-dot"></i> Jr. La Mar 237 - Jauja,
+          Junín, Perú
+        </p>
+        <p><i class="fa-solid fa-phone"></i> +51 912 345 678</p>
+        <p><i class="fa-solid fa-envelope"></i> contacto@ampere.edu.pe</p>
+      </div>
+
+      <div class="footer-block footer-social">
+        <h4>Síguenos</h4>
+        <div class="social-icons">
+          <a href="https://wa.me/51912345678" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=61565436735018" target="_blank"><i
+              class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://www.youtube.com/@AmpereMaxwell-n3c" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://www.tiktok.com/@academiaampere_maxewell" target="_blank"><i
+              class="fa-brands fa-tiktok"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>
+        &copy; 2025 Academia Ampere Maxwell. Todos los derechos reservados. |
+        <a href="#">Política de privacidad</a> |
+        <a href="#">Términos de uso</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000, // Duración animación
+      once: false, // Permitir repetir al hacer scroll
+      mirror: true, // Re-anima al volver a subir
+    });
+  </script>
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  </script>
+
+  <script>
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.querySelector(".nav-links");
+    const navItems = document.querySelectorAll(".nav-links a");
+
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+    });
+
+    // Cierra el menú al hacer clic en cualquier enlace
+    navItems.forEach((link) => {
+      link.addEventListener("click", () => {
+        if (navLinks.classList.contains("show")) {
+          navLinks.classList.remove("show");
+        }
+      });
+    });
+  </script>
+
+  <script src="assets/js/script.js"></script>
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script>
+    const swiper = new Swiper(".mySwiper", {
+      loop: false,
+      slidesPerView: 1,
+      spaceBetween: 30,
+      autoplay: {
+        delay: 6000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const countdown = () => {
+        const countdownDate = new Date("2025-12-15T00:00:00").getTime(); // <--- AJUSTA FECHA
+        const now = new Date().getTime();
+        const distance = countdownDate - now;
+
+        if (distance <= 0) {
+          document.getElementById("countdown").innerHTML =
+            "<strong>¡Inscripciones cerradas!</strong>";
+          return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor(
+          (distance % (1000 * 60 * 60)) / (1000 * 60)
+        );
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("days").textContent = String(days).padStart(
+          2,
+          "0"
+        );
+        document.getElementById("hours").textContent = String(hours).padStart(
+          2,
+          "0"
+        );
+        document.getElementById("minutes").textContent = String(
+          minutes
+        ).padStart(2, "0");
+        document.getElementById("seconds").textContent = String(
+          seconds
+        ).padStart(2, "0");
+      };
+
+      countdown(); // Llama una vez al cargar
+      setInterval(countdown, 1000); // Llama cada segundo
+    });
+  </script>
+
+  <script>
+    const track = document.querySelector(".slider-track");
+    const prevBtn = document.querySelector(".slider-btn.prev");
+    const nextBtn = document.querySelector(".slider-btn.next");
+    const cards = document.querySelectorAll(".testimonio-card");
+
+    let index = 0;
+
+    const updateSlider = () => {
+      const cardWidth = cards[0].offsetWidth + 30; // card + gap
+      const visibleCards = window.innerWidth < 768 ? 1 : 2;
+      const maxIndex = cards.length - visibleCards;
+
+      if (index < 0) index = 0;
+      if (index > maxIndex) index = maxIndex;
+
+      track.style.transform = `translateX(-${index * cardWidth}px)`;
+    };
+
+    nextBtn.addEventListener("click", () => {
+      index++;
+      updateSlider();
+    });
+
+    prevBtn.addEventListener("click", () => {
+      index--;
+      updateSlider();
+    });
+
+    window.addEventListener("resize", updateSlider);
+    window.addEventListener("load", updateSlider);
+  </script>
+</body>
+
+</html>

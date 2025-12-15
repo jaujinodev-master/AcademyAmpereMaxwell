@@ -288,8 +288,9 @@ INSERT INTO roles (nombre_rol, descripcion, permisos) VALUES
 
 -- Insertar usuario administrador por defecto
 -- Usuario: admin | Contraseña: admin123
+-- IMPORTANTE: Este hash fue generado con password_hash('admin123', PASSWORD_BCRYPT)
 INSERT INTO usuarios (id_rol, username, email, password_hash, nombres, apellidos, dni, estado) VALUES
-(1, 'admin', 'admin@ampere-maxwell.edu.pe', '$2y$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5GyVyhJ5ObB.u', 'Administrador', 'Sistema', '00000000', 'activo');
+(1, 'admin', 'admin@ampere-maxwell.edu.pe', '$2y$10$xQR14p6530YJabLNLbfCVe3yFistXIb2/RuY/JCF11hgqhvQvD11u', 'Administrador', 'Sistema', '00000000', 'activo');
 
 -- Insertar un ciclo académico de ejemplo
 INSERT INTO ciclos_academicos (nombre_ciclo, descripcion, modalidad, fecha_inicio, fecha_fin, costo, cupos_disponibles, estado) VALUES

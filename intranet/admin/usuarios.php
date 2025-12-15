@@ -99,11 +99,96 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 throw new Exception('No puede eliminar su propia cuenta');
             }
             
+            // Verificar si tiene registros relacionados
+            $checkTables = [
+                'matriculas' => 'id_alumno',
+                'profesor_curso' => 'id_profesor',
+                'calificaciones' => 'id_alumno',
+                'asistencias' => 'id_alumno'
+            ];
+            
+            foreach ($checkTables as $table => $column) {
+                $checkSql = "SELECT COUNT(*) FROM $table WHERE $column = ?";
+                $checkStmt = $conn->prepare($checkSql);
+                $checkStmt->execute([$userId]);
+                if ($checkStmt->fetchColumn() > 0) {
+                    // En lugar de eliminar, desactivar el usuario
+                    $stmt = $conn->prepare("UPDATE usuarios SET estado = 'inactivo' WHERE id_usuario = ?");
+                    $stmt->execute([$userId]);
+                    throw new Exception('El usuario tiene registros asociados. Se ha desactivado en lugar de eliminar.');
+                }
+            }
+            
             $stmt = $conn->prepare("DELETE FROM usuarios WHERE id_usuario = ?");
             $stmt->execute([$userId]);
             
             $message = 'Usuario eliminado exitosamente';
             $messageType = 'success';
+        } catch (PDOException $e) {
+            if (strpos($e->getMessage(), 'foreign key constraint') !== false) {
+                $message = 'No se puede eliminar: el usuario tiene registros asociados. Se ha desactivado.';
+                $conn->prepare("UPDATE usuarios SET estado = 'inactivo' WHERE id_usuario = ?")->execute([$userId]);
+                $messageType = 'warning';
+            } else {
+                $message = $e->getMessage();
+                $messageType = 'error';
+            }
+        } catch (Exception $e) {
+            $message = $e->getMessage();
+            $messageType = 'warning';
+        }
+    }
+    
+    if ($action === 'update') {
+        try {
+            $userId = (int)$_POST['user_id'];
+            $nombres = trim($_POST['nombres']);
+            $apellidos = trim($_POST['apellidos']);
+            $email = trim($_POST['email']);
+            $username = trim($_POST['username']);
+            $dni = trim($_POST['dni']);
+            $telefono = trim($_POST['telefono']);
+            $id_rol = (int)$_POST['id_rol'];
+            $password = $_POST['password'] ?? '';
+            
+            // Validar campos requeridos
+            if (empty($nombres) || empty($apellidos) || empty($email) || empty($username)) {
+                throw new Exception('Por favor complete todos los campos obligatorios');
+            }
+            
+            // Verificar email único (excluyendo el usuario actual)
+            $stmt = $conn->prepare("SELECT id_usuario FROM usuarios WHERE email = ? AND id_usuario != ?");
+            $stmt->execute([$email, $userId]);
+            if ($stmt->fetch()) {
+                throw new Exception('El email ya está registrado por otro usuario');
+            }
+            
+            // Verificar username único (excluyendo el usuario actual)
+            $stmt = $conn->prepare("SELECT id_usuario FROM usuarios WHERE username = ? AND id_usuario != ?");
+            $stmt->execute([$username, $userId]);
+            if ($stmt->fetch()) {
+                throw new Exception('El nombre de usuario ya existe');
+            }
+            
+            // Actualizar usuario
+            if (!empty($password)) {
+                // Si se proporcionó nueva contraseña
+                $passwordHash = password_hash($password, HASH_ALGO, ['cost' => HASH_COST]);
+                $sql = "UPDATE usuarios SET id_rol = ?, username = ?, email = ?, password_hash = ?, 
+                        nombres = ?, apellidos = ?, dni = ?, telefono = ? WHERE id_usuario = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute([$id_rol, $username, $email, $passwordHash, $nombres, $apellidos, $dni, $telefono, $userId]);
+            } else {
+                // Sin cambio de contraseña
+                $sql = "UPDATE usuarios SET id_rol = ?, username = ?, email = ?, 
+                        nombres = ?, apellidos = ?, dni = ?, telefono = ? WHERE id_usuario = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute([$id_rol, $username, $email, $nombres, $apellidos, $dni, $telefono, $userId]);
+            }
+            
+            $message = 'Usuario actualizado exitosamente';
+            $messageType = 'success';
+            
         } catch (Exception $e) {
             $message = $e->getMessage();
             $messageType = 'error';
@@ -383,41 +468,43 @@ $presetRole = $_GET['type'] ?? null;
         <div class="sidebar-overlay" id="sidebarOverlay"></div>
     </div>
     
-    <!-- Modal Nuevo Usuario -->
+    <!-- Modal Crear/Editar Usuario -->
     <div class="modal-form <?= $showModal ? 'show' : '' ?>" id="userModal">
         <div class="modal-content-form">
             <div class="modal-header-form">
-                <h3 style="font-size: 1.2rem; font-weight: 600;">Nuevo Usuario</h3>
+                <h3 id="modalTitle" style="font-size: 1.2rem; font-weight: 600;">Nuevo Usuario</h3>
                 <button class="close-modal-btn" onclick="closeModal()">&times;</button>
             </div>
             <div class="modal-body-form">
-                <form method="POST">
-                    <input type="hidden" name="action" value="create">
+                <form method="POST" id="userForm">
+                    <input type="hidden" name="action" id="formAction" value="create">
+                    <input type="hidden" name="user_id" id="userId" value="">
                     
                     <div class="form-grid">
                         <div class="form-group">
                             <label>Nombres *</label>
-                            <input type="text" name="nombres" required placeholder="Nombres completos">
+                            <input type="text" name="nombres" id="inputNombres" required placeholder="Nombres completos">
                         </div>
                         <div class="form-group">
                             <label>Apellidos *</label>
-                            <input type="text" name="apellidos" required placeholder="Apellidos completos">
+                            <input type="text" name="apellidos" id="inputApellidos" required placeholder="Apellidos completos">
                         </div>
                         <div class="form-group">
                             <label>Email *</label>
-                            <input type="email" name="email" required placeholder="correo@ejemplo.com">
+                            <input type="email" name="email" id="inputEmail" required placeholder="correo@ejemplo.com">
                         </div>
                         <div class="form-group">
                             <label>Usuario *</label>
-                            <input type="text" name="username" required placeholder="nombre.usuario">
+                            <input type="text" name="username" id="inputUsername" required placeholder="nombre.usuario">
                         </div>
                         <div class="form-group">
-                            <label>Contraseña *</label>
-                            <input type="password" name="password" required placeholder="Mínimo 6 caracteres" minlength="6">
+                            <label id="passwordLabel">Contraseña *</label>
+                            <input type="password" name="password" id="inputPassword" placeholder="Mínimo 6 caracteres" minlength="6">
+                            <small id="passwordHelp" style="color: var(--dash-text-muted); display: none;">Dejar vacío para mantener la contraseña actual</small>
                         </div>
                         <div class="form-group">
                             <label>Rol *</label>
-                            <select name="id_rol" required>
+                            <select name="id_rol" id="inputRol" required>
                                 <?php foreach ($roles as $rol): ?>
                                     <option value="<?= $rol['id_rol'] ?>" <?= ($presetRole === 'alumno' && $rol['id_rol'] == 3) || ($presetRole === 'profesor' && $rol['id_rol'] == 2) ? 'selected' : '' ?>>
                                         <?= htmlspecialchars($rol['nombre_rol']) ?>
@@ -427,18 +514,18 @@ $presetRole = $_GET['type'] ?? null;
                         </div>
                         <div class="form-group">
                             <label>DNI</label>
-                            <input type="text" name="dni" placeholder="12345678" maxlength="8">
+                            <input type="text" name="dni" id="inputDni" placeholder="12345678" maxlength="8">
                         </div>
                         <div class="form-group">
                             <label>Teléfono</label>
-                            <input type="text" name="telefono" placeholder="+51 999 999 999">
+                            <input type="text" name="telefono" id="inputTelefono" placeholder="+51 999 999 999">
                         </div>
                     </div>
                     
                     <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px;">
                         <button type="button" class="btn btn-outline" onclick="closeModal()">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save"></i> Guardar Usuario
+                        <button type="submit" class="btn btn-primary" id="submitBtn">
+                            <i class="fas fa-save"></i> <span id="submitText">Guardar Usuario</span>
                         </button>
                     </div>
                 </form>
@@ -449,25 +536,79 @@ $presetRole = $_GET['type'] ?? null;
     <script src="../assets/js/dashboard.js"></script>
     <script>
         const modal = document.getElementById('userModal');
+        const form = document.getElementById('userForm');
         
-        function openModal() {
+        // Datos de usuarios para edición (embebidos desde PHP)
+        const usersData = <?= json_encode(array_map(function($u) {
+            return [
+                'id' => $u['id_usuario'],
+                'nombres' => $u['nombres'],
+                'apellidos' => $u['apellidos'],
+                'email' => $u['email'],
+                'username' => $u['username'],
+                'dni' => $u['dni'],
+                'telefono' => $u['telefono'],
+                'id_rol' => $u['id_rol']
+            ];
+        }, $usuarios)) ?>;
+        
+        function openModal(isEdit = false) {
+            if (!isEdit) {
+                // Modo crear - limpiar formulario
+                form.reset();
+                document.getElementById('formAction').value = 'create';
+                document.getElementById('userId').value = '';
+                document.getElementById('modalTitle').textContent = 'Nuevo Usuario';
+                document.getElementById('submitText').textContent = 'Guardar Usuario';
+                document.getElementById('inputPassword').required = true;
+                document.getElementById('passwordLabel').innerHTML = 'Contraseña *';
+                document.getElementById('passwordHelp').style.display = 'none';
+            }
             modal.classList.add('show');
         }
         
         function closeModal() {
             modal.classList.remove('show');
+            form.reset();
             window.history.replaceState({}, '', 'usuarios.php<?= $filter !== 'all' ? '?filter=' . $filter : '' ?>');
         }
         
         function editUser(id) {
-            // TODO: Implementar edición
-            showToast('Funcionalidad de edición próximamente', 'info');
+            // Buscar usuario en los datos
+            const user = usersData.find(u => u.id == id);
+            if (!user) {
+                showError('Usuario no encontrado');
+                return;
+            }
+            
+            // Configurar modal para edición
+            document.getElementById('formAction').value = 'update';
+            document.getElementById('userId').value = id;
+            document.getElementById('modalTitle').textContent = 'Editar Usuario';
+            document.getElementById('submitText').textContent = 'Actualizar Usuario';
+            document.getElementById('inputPassword').required = false;
+            document.getElementById('passwordLabel').innerHTML = 'Nueva Contraseña';
+            document.getElementById('passwordHelp').style.display = 'block';
+            
+            // Llenar campos
+            document.getElementById('inputNombres').value = user.nombres || '';
+            document.getElementById('inputApellidos').value = user.apellidos || '';
+            document.getElementById('inputEmail').value = user.email || '';
+            document.getElementById('inputUsername').value = user.username || '';
+            document.getElementById('inputDni').value = user.dni || '';
+            document.getElementById('inputTelefono').value = user.telefono || '';
+            document.getElementById('inputRol').value = user.id_rol;
+            document.getElementById('inputPassword').value = '';
+            
+            openModal(true);
         }
         
         // Mostrar mensaje si existe
         <?php if ($message): ?>
             <?php if ($messageType === 'success'): ?>
                 showSuccess('<?= addslashes($message) ?>');
+            <?php elseif ($messageType === 'warning'): ?>
+                showToast('<?= addslashes($message) ?>', 'warning');
             <?php else: ?>
                 showError('<?= addslashes($message) ?>');
             <?php endif; ?>

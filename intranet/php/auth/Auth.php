@@ -282,7 +282,7 @@ class Auth {
         }
         
         // Avatar por defecto
-        return APP_URL . '/intranet/assets/images/default-avatar.png';
+        return APP_URL . '/intranet/assets/images/default-avatar.svg';
     }
 }
 ?>

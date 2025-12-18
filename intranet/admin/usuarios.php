@@ -316,14 +316,29 @@ $presetRole = $_GET['type'] ?? null;
             border-color: var(--dash-primary);
             color: #fff;
         }
-        .user-actions { display: flex; gap: 8px; }
+        .user-actions { 
+            display: flex; 
+            gap: 8px; 
+            position: relative;
+            z-index: 10;
+        }
+        .user-actions form {
+            display: inline-flex !important;
+        }
         .user-actions button {
-            padding: 6px 10px;
+            padding: 8px 12px;
             border: none;
             border-radius: 6px;
             cursor: pointer;
             font-size: 0.85rem;
             transition: all var(--transition-fast);
+            pointer-events: auto !important;
+            position: relative;
+            z-index: 10;
+        }
+        .user-actions button:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
         }
         .btn-edit { background: var(--dash-info); color: #fff; }
         .btn-delete { background: var(--dash-danger); color: #fff; }

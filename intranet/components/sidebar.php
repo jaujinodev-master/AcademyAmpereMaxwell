@@ -19,6 +19,7 @@ $menus = [
         ['icon' => 'fa-calendar-alt', 'label' => 'Ciclos', 'url' => 'ciclos.php', 'file' => 'ciclos.php'],
         ['icon' => 'fa-book', 'label' => 'Cursos', 'url' => 'cursos.php', 'file' => 'cursos.php'],
         ['icon' => 'fa-user-graduate', 'label' => 'Matrículas', 'url' => 'matriculas.php', 'file' => 'matriculas.php'],
+        ['icon' => 'fa-clock', 'label' => 'Horarios', 'url' => 'horarios.php', 'file' => 'horarios.php'],
         ['icon' => 'fa-chalkboard-teacher', 'label' => 'Profesores', 'url' => 'profesores.php', 'file' => 'profesores.php'],
         ['icon' => 'fa-chart-bar', 'label' => 'Reportes', 'url' => 'reportes.php', 'file' => 'reportes.php'],
         ['icon' => 'fa-cog', 'label' => 'Configuración', 'url' => 'configuracion.php', 'file' => 'configuracion.php'],

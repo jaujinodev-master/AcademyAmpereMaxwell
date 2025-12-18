@@ -132,8 +132,29 @@ $ciclos = $conn->query("SELECT * FROM ciclos_academicos ORDER BY fecha_inicio DE
         .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px 14px; border: 2px solid var(--dash-border); border-radius: 10px; font-size: 0.95rem; font-family: inherit; }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--dash-primary); }
         .close-modal-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--dash-text-muted); }
-        .curso-actions { display: flex; gap: 8px; }
-        .curso-actions button { padding: 6px 10px; border: none; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
+        .curso-actions { 
+            display: flex; 
+            gap: 8px;
+            position: relative;
+            z-index: 10;
+        }
+        .curso-actions form {
+            display: inline-flex !important;
+        }
+        .curso-actions button { 
+            padding: 8px 12px; 
+            border: none; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-size: 0.85rem;
+            pointer-events: auto !important;
+            position: relative;
+            z-index: 10;
+        }
+        .curso-actions button:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
         .btn-edit { background: var(--dash-info); color: #fff; }
         .btn-delete { background: var(--dash-danger); color: #fff; }
         @media (max-width: 768px) { .form-grid { grid-template-columns: 1fr; } }
